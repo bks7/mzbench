@@ -48,7 +48,7 @@ ensure_hostnames_are_reachable_from_director(Hostnames) ->
         fun(X) -> X end,
         mzb_lists:pmap(
             fun(Hostname) ->
-                Cmd = lists:flatten(io_lib:format("ping -qc1 ~s", [Hostname])),
+                Cmd = lists:flatten(io_lib:format("nc -z -w5 ~s ", [Hostname])),
                 {Code, Output} = cmd(Cmd),
                 case Code of
                     0 -> true;
