@@ -70,9 +70,9 @@ nodename(Name, Host) ->
     Name ++ "@" ++ Host.
 
 get_hostnames(UserName, Hosts, Logger) ->
-    Hostnames = mzb_subprocess:remote_cmd(UserName, Hosts, "hostname", [], Logger, []),
+    %Hostnames = mzb_subprocess:remote_cmd(UserName, Hosts, "hostname", [], Logger, []),
     Logger(debug, "fqdn for ~p: ~p", [Hosts, Hostnames]),
-    Res = [ hd(string:tokens(FName, ".")) || FName <- Hostnames],
+    Res = [ hd(string:tokens(FName, ".")) || FName <- Hosts],
     Logger(info, "Shortnames for ~p are ~p", [Hosts, Res]),
     Res.
 
